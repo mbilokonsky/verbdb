@@ -1,0 +1,27 @@
+{
+  "name": "verbdb",
+  "version": "1.0.0",
+  "description": "a weird database",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mbilokonsky/verbdb.git"
+  },
+  "keywords": [
+    "database",
+    "postmodernism"
+  ],
+  "author": "mbilokonsky, davidfactorial",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mbilokonsky/verbdb/issues"
+  },
+  "homepage": "https://github.com/mbilokonsky/verbdb#readme",
+  "dependencies": {
+    "jest": "^27.2.4",
+    "uuid": "^8.3.2"
+  }
+}

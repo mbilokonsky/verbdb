@@ -1,4 +1,4 @@
-const { createPointer, createEvent, createStore } = require("../index")
+const { createPointer, createEvent, createStore } = require("../../src/api")
 
 describe("VerbDB Store", () => {
 

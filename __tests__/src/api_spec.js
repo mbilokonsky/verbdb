@@ -24,10 +24,10 @@ describe("VerbDB Store", () => {
     return createEvent(createTestMeta("Set Myk's city"), pointers)
   }
 
-  const store = createStore(":myk", {})
+  const store = createStore(":myk", require("../../src/data_stores")["memory"]({}))
 
   it("allows you to create a store", () => {
-    expect(typeof store.writeEvent).toBe("function")
+    expect(typeof store.write).toBe("function")
   })
   it("allows you to create an event", () => {
     const event1 = createTestEvent1()
@@ -36,12 +36,12 @@ describe("VerbDB Store", () => {
   it("allows you to query for state", () => {
     const event1 = createTestEvent1()
     const event2 = createTestEvent2()
-    store.writeEvent(event1)
-    store.writeEvent(event2)
+    store.write(event1)
+    store.write(event2)
 
-    expect(store.submitQuery(":myk")).toStrictEqual({
-      birthday: [new Date("1/22/1983").toISOString()],
-      location: [":new york"]
+    expect(store.read(":myk")).toStrictEqual({
+      birthday: [{$verb: event1.id, value: new Date("1/22/1983").toISOString()}],
+      location: [{$verb: event2.id, value:":new york"}]
     })
   })
 })

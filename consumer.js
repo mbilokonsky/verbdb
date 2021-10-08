@@ -38,4 +38,6 @@ marriage = createMarriageRelationship(":myk", ":hannah", "to live happily ever a
 memoryStore.write(relationship)
 memoryStore.write(marriage)
 
-console.log(memoryStore.read(":hannah"))
+
+const myk = memoryStore.read(":myk")
+console.dir(myk)

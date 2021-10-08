@@ -3,7 +3,8 @@ const verbDB = require("./src/index")
 
 const memoryStore = verbDB.store.create({
     creator_id: CREATOR_ID,
-    store_type: "memory"
+    store_type: "filesystem",
+    file_path: "."
 })
 
 const createEmploymentRelationship = (employer, employee, salary, intent) => {

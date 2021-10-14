@@ -3,8 +3,8 @@ const verbDB = require("./src/index")
 
 const memoryStore = verbDB.store.create({
     creator_id: CREATOR_ID,
-    store_type: "filesystem",
-    file_path: "."
+    store_type: "sqlite",
+    file_path: "test.db"
 })
 
 const createEmploymentRelationship = (employer, employee, salary, intent) => {
@@ -38,7 +38,6 @@ marriage = createMarriageRelationship(":myk", ":hannah", "to live happily ever a
 
 memoryStore.write(relationship)
 memoryStore.write(marriage)
-
 
 const myk = memoryStore.read(":myk")
 console.dir(myk)

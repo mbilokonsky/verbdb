@@ -1,4 +1,5 @@
 module.exports = {
     filesystem: require("./filesystem"),
-    memory: require("./memory")
+    memory: require("./memory"),
+    sqlite: require("./sqlite")
 }

@@ -23,7 +23,7 @@ module.exports = config => {
     }
 
     const update_object_cache = event => {
-        object_cache.append(event)
+        object_cache.integrate(event)
     }
 
     const read = key => {

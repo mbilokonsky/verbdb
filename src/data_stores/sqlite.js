@@ -14,7 +14,7 @@ module.exports = config => {
 
     const write = event => {
         db.prepare('INSERT INTO Events (id, event) VALUES (?, ?)').run(event.id, JSON.stringify(event))
-        object_cache.append(event)
+        object_cache.integrate(event)
     }
 
     return { read, write }

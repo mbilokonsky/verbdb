@@ -6,7 +6,7 @@ object_cache.initialize(immutable_history)
 
 const write = event => {
     immutable_history.push(event)
-    object_cache.append(event)
+    object_cache.integrate(event)
 }
 
 const read = query => {

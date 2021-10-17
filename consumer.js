@@ -1,10 +1,13 @@
 const CREATOR_ID = ":myk"
 const verbDB = require("./src/index")
 
-const memoryStore = verbDB.store.create({
+const store = verbDB.store.create({
     creator_id: CREATOR_ID,
     store_type: "sqlite",
-    file_path: "./data.db"
+    file_path: "./data.db",
+    filter_type: "none",
+    filter_value: "",
+    reducer_type: "core"
 })
 
 const createEmploymentRelationship = (employer, employee, salary, intent) => {
@@ -36,8 +39,8 @@ const createMarriageRelationship = (spouse1, spouse2, intent) => {
 relationship = createEmploymentRelationship("Foo Company", ":myk", 1000000, "Hire myk to build a weird databaseamajig thing!")
 marriage = createMarriageRelationship(":myk", ":hannah", "to live happily ever after")
 
-memoryStore.write(relationship)
-memoryStore.write(marriage)
+store.write(relationship)
+store.write(marriage)
 
-const myk = memoryStore.read(":myk")
+const myk = store.read(":myk")
 console.dir(myk)

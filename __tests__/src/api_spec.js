@@ -24,7 +24,7 @@ describe("VerbDB Store", () => {
     return createEvent(createTestMeta("Set Myk's city"), pointers)
   }
 
-  const store = createStore(":myk", require("../../src/data_stores")["memory"]({}))
+  const store = createStore(":myk", require("../../src/data_stores")["memory"]({}, require("../../src/object_cache")()))
 
   it("allows you to create a store", () => {
     expect(typeof store.write).toBe("function")

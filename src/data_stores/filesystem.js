@@ -1,7 +1,6 @@
 const fs = require('fs')
-const object_cache_builder = require("../object_cache")
 
-module.exports = config => {
+module.exports = (config, object_cache) => {
 
     const {creator_id, file_path} = config
    
@@ -13,7 +12,6 @@ module.exports = config => {
 
     const load_immutable_stream = () => JSON.parse(fs.readFileSync(file_path + "/immutable.json"))
     
-    const object_cache = object_cache_builder()
     object_cache.initialize(load_immutable_stream())
 
     const write_event_to_immutable_stream = e => {

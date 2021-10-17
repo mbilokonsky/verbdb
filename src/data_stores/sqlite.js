@@ -1,11 +1,9 @@
 const Database = require('better-sqlite3');
-const object_cache_builder = require("../object_cache")
 
-module.exports = config => {
+module.exports = (config, object_cache) => {
     const db = new Database(config.path, { verbose: console.log });
     db.prepare('CREATE TABLE Events(id varchar, event json)').run()
     
-    const object_cache = object_cache_builder();
     object_cache.initialize(db.prepare("SELECT * FROM Events").all())
 
     const read = key => {

@@ -40,8 +40,8 @@ describe("VerbDB Store", () => {
     store.write(event2)
 
     expect(store.read(":myk")).toStrictEqual({
-      birthday: [{$verb: event1.id, value: new Date("1/22/1983").toISOString()}],
-      location: [{$verb: event2.id, value:":new york"}]
+      birthday: [{_verb: event1.id, date: new Date("1/22/1983").toISOString()}],
+      location: [{_verb: event2.id, city:":new york"}]
     })
   })
 })

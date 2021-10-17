@@ -1,22 +1,20 @@
 const Database = require('better-sqlite3');
+const object_cache_builder = require("../object_cache")
 
 module.exports = config => {
     const db = new Database(config.path, { verbose: console.log });
     db.prepare('CREATE TABLE Events(id varchar, event json)').run()
+    
+    const object_cache = object_cache_builder();
+    object_cache.initialize(db.prepare("SELECT * FROM Events").all())
 
-    // This lookup right now is receiving a key like ":myk", not the UUID of an event.
-    // We need a way to lookup events-by-targets, and then to reduce them.
-    // I'm thinking an in-memory object cache along with every store, for now?
-    // we can reconstitute it by dumping the store into memory and reducing.
     const read = key => {
-        console.log("Looking up key:", key)
-        const row = db.prepare("SELECT * FROM Events WHERE id LIKE ?").exec(key)
-        console.dir(row)
-        return row
+        return object_cache.query(key, {}) // the {} is a schema object, TBI
     }
 
     const write = event => {
         db.prepare('INSERT INTO Events (id, event) VALUES (?, ?)').run(event.id, JSON.stringify(event))
+        object_cache.append(event)
     }
 
     return { read, write }

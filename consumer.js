@@ -4,7 +4,7 @@ const verbDB = require("./src/index")
 const memoryStore = verbDB.store.create({
     creator_id: CREATOR_ID,
     store_type: "sqlite",
-    file_path: "test.db"
+    file_path: "./data.db"
 })
 
 const createEmploymentRelationship = (employer, employee, salary, intent) => {
@@ -15,8 +15,8 @@ const createEmploymentRelationship = (employer, employee, salary, intent) => {
     }
 
     const pointers = [
-        { target: employee, context: "employer" , label: "employee" },
-        { target: employer, context: "employees", label: "employer" },
+        { target: employee, context: "employer" , label: "resource" },
+        { target: employer, context: "employees", label: "institution" },
         { target: salary, context: null, label: "salary" }
     ]
 

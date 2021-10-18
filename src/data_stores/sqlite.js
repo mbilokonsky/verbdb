@@ -6,8 +6,8 @@ module.exports = (config, object_cache) => {
     
     object_cache.initialize(db.prepare("SELECT * FROM Events").all())
 
-    const read = key => {
-        return object_cache.query(key, {}) // the {} is a schema object, TBI
+    const read = (key, schema) => {
+        return object_cache.query(key, schema)
     }
 
     const write = event => {

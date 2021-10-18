@@ -20,8 +20,8 @@ const createStore = (creator_id, data_store) => {
     return data_store.write(event)
   }
 
-  const read = key => {
-    return data_store.read(key)
+  const read = (key, schema = {}) => {
+    return data_store.read(key, schema)
   }
 
   return {

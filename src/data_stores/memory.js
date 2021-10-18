@@ -8,8 +8,8 @@ module.exports = (_config, object_cache) => {
       object_cache.integrate(event)
   }
 
-  const read = query => {
-      return object_cache.query(query, {}) // schema)
+  const read = (key, schema) => {
+      return object_cache.query(key, schema)
   }
 
   return { read, write }

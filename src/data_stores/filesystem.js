@@ -24,8 +24,8 @@ module.exports = (config, object_cache) => {
         object_cache.integrate(event)
     }
 
-    const read = key => {
-        return object_cache.query(key, {}) // {} is a placeholder for a schema
+    const read = (key, schema) => {
+        return object_cache.query(key, schema)
     }
 
     const write = event => {

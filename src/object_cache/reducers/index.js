@@ -5,7 +5,7 @@ module.exports = {
             if (!context) { return }
             if (!object_cache[target]) { object_cache[target] = {} }
         
-            values = event.pointers.filter(pointer => pointer.target != target).map(e => ({ [e.label]: e.target, _verb: event.id }))
+            values = event.pointers.filter(pointer => pointer.target != target).map(e => ({ [e.label]: e.target, _verb: event.id, _timestamp: event.timestamp }))
             values = values.reduce((acc, val) => {
             return {...acc, ...val}
             }, {})

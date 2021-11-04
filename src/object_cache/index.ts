@@ -1,11 +1,11 @@
-import { ObjectCache, Reference, ReifiedState, Relationship, Schema } from "../types"
+import { ObjectCache, Reference, ReifiedState, ReifiedStateWrapper, Relationship, Schema, TargetReference } from "../types"
 
 const apply_schema = (event:Relationship, _schema:Schema) => event
 const filters = require("./filters")
 const reducers =  require("./reducers")
 
 module.exports = (filter_type = "none", filter_value = "", reducer_type = "core"):ObjectCache => {
-    let object_hash:ReifiedState = {}
+    let object_hash:ReifiedStateWrapper = {}
     const reducer = reducers[reducer_type]
     const filter_function = filters[filter_type](filter_value)
 
@@ -19,7 +19,7 @@ module.exports = (filter_type = "none", filter_value = "", reducer_type = "core"
     const integrate_many = (events:Relationship[]) => object_hash = filtered_events(events).reduce(reducer, object_hash)
     const invalidate = (valid_events:Relationship[]) => rebuild(filtered_events(valid_events))
 
-    const query = (key:Reference, _schema:Schema) => {
+    const query = (key:Reference, _schema:Schema):ReifiedState => {
         return object_hash[key]
     }
 

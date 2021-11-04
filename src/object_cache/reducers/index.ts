@@ -1,4 +1,4 @@
-import { ObjectCache, Reference, Relationship, VerbValue } from "../../types"
+import { ObjectCache, Reference, ReifiedState, Relationship, VerbValue } from "../../types"
 
 const validate = (target:VerbValue):string => {
     return target.toString()
@@ -12,7 +12,7 @@ module.exports = {
             const validTarget = validate(target)
 
             
-            if (!object_cache[validTarget]) { object_cache[validTarget] = {} }
+            if (!object_cache[validTarget]) { object_cache[validTarget] = {} as ReifiedState }
             var values = event.pointers.filter(pointer => pointer.target != target).map(e => ({ [e.label]: e.target, _verb: event.id, _timestamp: event.timestamp })).reduce((acc, val) => {
                 return {...acc, ...val}
             }, {})

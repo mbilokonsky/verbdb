@@ -29,10 +29,14 @@ export type Schema = {
 
 export type TargetReference = {
     [label:string]: VerbValue
-}
+} | {}
 
 export type ReifiedState = {
     [edgeName:string]: TargetReference[]
+} | {}
+
+export type ReifiedStateWrapper = {
+    [key:string]:ReifiedState
 }
 
 export type ObjectCache = {
@@ -40,7 +44,7 @@ export type ObjectCache = {
     integrate: (event:Relationship) => ReifiedState,
     integrate_many: (events:Relationship[]) => ReifiedState,
     invalidate: (events:Relationship[]) => ReifiedState,
-    query: (key: Reference, schema: Schema) => TargetReference[]
+    query: (key: Reference, schema: Schema) => ReifiedState
 }
 
 export type ObjectCacheConfig = {
@@ -50,6 +54,6 @@ export type ObjectCacheConfig = {
 }
 
 export type DataStore = {
-    read: (key: Reference, schema: Schema) => TargetReference[],
+    read: (key: Reference, schema: Schema) => ReifiedState,
     write: (relationship: Relationship) => void
 }
